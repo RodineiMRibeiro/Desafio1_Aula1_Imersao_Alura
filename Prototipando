@@ -1,0 +1,42 @@
+>> Descreva a estrutura de tabelas necessárias para um controle de localização de produtos, levando em conta que pode possuir mais de uma empresa, 
+multiplas localizações dos produtos dentro de cada empresa, e ainda me permita separar os produtos por lote, dentro de cada localização. 
+Considere que a tabela "produto" já existe".
+
+
+>> 
+Estrutura de tabelas para controle de localização de produtos:
+Considerando a existência da tabela "produto", precisamos criar as seguintes tabelas:
+empresa:
+id_empresa (PK): Identificador único da empresa.
+nome: Nome da empresa.
+... (outros campos relevantes): Informações adicionais da empresa, como CNPJ, endereço, etc.
+localizacao:
+id_localizacao (PK): Identificador único da localização.
+id_empresa (FK): Identificador da empresa à qual a localização pertence.
+nome: Nome ou descrição da localização (ex: "Armazém A", "Prateleira 5", "Corredor 3").
+... (outros campos relevantes): Informações adicionais da localização, como capacidade, tipo, etc.
+lote:
+id_lote (PK): Identificador único do lote.
+id_produto (FK): Identificador do produto ao qual o lote pertence.
+data_fabricacao: Data de fabricação do lote.
+data_validade: Data de validade do lote.
+quantidade: Quantidade de itens no lote.
+... (outros campos relevantes): Informações adicionais do lote, como número de série, etc.
+estoque:
+id_estoque (PK): Identificador único do registro de estoque.
+id_lote (FK): Identificador do lote.
+id_localizacao (FK): Identificador da localização.
+quantidade: Quantidade de itens do lote armazenados na localização.
+Relacionamentos entre as tabelas:
+empresa tem um relacionamento de um para muitos com localizacao. Uma empresa pode ter várias localizações, mas uma localização pertence a apenas uma empresa.
+localizacao tem um relacionamento de muitos para muitos com lote através da tabela estoque. Uma localização pode armazenar vários lotes, e um lote pode estar em várias localizações.
+produto tem um relacionamento de um para muitos com lote. Um produto pode ter vários lotes, mas um lote pertence a apenas um produto.
+Observações:
+A tabela estoque é essencial para controlar a quantidade de cada lote em cada localização.
+Você pode adicionar mais campos às tabelas conforme a necessidade do seu sistema.
+Índices nas colunas de chave estrangeira podem melhorar o desempenho das consultas.
+Com essa estrutura, você poderá:
+Rastrear a localização de cada lote de produtos.
+Controlar a quantidade de produtos em cada localização.
+Identificar a empresa e a localização de um determinado lote.
+Gerenciar o estoque de produtos por empresa, localização e lote.
